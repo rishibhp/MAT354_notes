@@ -1,0 +1,132 @@
+\subsection{Residue Theorem}
+\begin{theorem}[Residue Theorem]
+Let $\Omega$ be an open subset of the Riemann sphere $S^2$ (in particular $\Omega$ might contain the point at $\infty$) and suppose $f(z)$ is a function on $\Omega$ that is holomorphic everywhere except maybe at isolated points. Let $K$ be a compact set in $\Omega$ with piecewise $C^1$ oriented boundary $\Gamma$ in $\Omega$ such that $\Gamma$ contains no singularities or the point at infinity. Then 
+$$ \frac{1}{2\pi i} \int_{\Gamma} f(z) dz = \sum_{ z_k \in S} res(f, z_k) $$
+where $S$ is the set of singularities of $f$ that lie in $K$.
+\end{theorem}
+\begin{remark}
+Note that compactness of $K$ implies that there can only ever be finitely many singularities within it since otherwise you could form a cover of $K$ which has not finite subcover.
+\end{remark}
+\begin{proof}
+We will consider 2 cases. The first case is when $\infty$ is not in $K$. For each $z_k \in S$ consider a closed disk $D_k$ (contained in the interior of $K$ of course) and let $\gamma_k$ be its boundary. Consider $K' = K \setminus \bigcup_k \text{Int}(D_k)$. Then $f$ is holomorphic in a neighbourhood of $K'$. Then by Green's theorem we have 
+$$ \int_{\partial K'} f(z) dz = \int_{K'} d(f(z) dz) = 0 $$
+where we use the fact that $f(z) dz$ is closed (Cauchy's Theorem) hence its differential is 0. But $\partial K' = \Gamma - \sum \gamma_k$. Therefore substituting this back in, we conclude that 
+$$ \int_\Gamma f(z) dz = \sum_{k} \int_{\gamma_k} f(z) dz = 2\pi i \sum_{z_k \in S} res(f, z_k) $$
+
+Now suppose $\infty$ is indeed in $K$. Then first we choose an $r$ so that $\abs{z} > r$ is contained in the interior of $K$. We choose $r$ sufficiently large so that $f(z)$ is holomorphic on $\abs{z} > r$, except maybe at $\infty$. Let $\gamma$ be the circle $\abs{z} = r$ oriented positively with respect to $\infty$. Then we define $K'' = K \setminus \{\abs{z} > r\}$. Then $\partial K'' = \Gamma - \gamma$ (the $-$ comes from the fact that $\gamma$ is oriented negatively with respect to 0). Since $K''$ does not contain $\infty$ we can use the previous result to conclude that 
+$$ \int_{\Gamma} f(z) dz - \int_\gamma f(z) dz = 2\pi i \sum_{z_k \in S} res(f, z_k) $$
+The second term on the left is exactly $2\pi ires(f, \infty)$ thus taking it to the other side gets us the desired result.
+\end{proof}
+
+We will be using the Residue Theorem to evaluate many integrals. For this we will need to calculate residues so it's useful to get some practice with that first. A very simple example is the case when the boundary $\Gamma$ is empty. In this case the Residue theorem tells us that the sum of the residues of a function that is holomorphic on the Riemann sphere, such as a rational function, is 0.
+
+\begin{example}\label{eg:residue-of-quotient}
+For another, less trivial example suppose $f(z)$ is a meromorphic function with a simple pole $z_0$. Then
+$$f(z) = \frac{1}{z - z_0}g(z)$$
+where $g$ is some holomorphic function such that $g(z_0) \neq 0$. Then by writing 
+$$g(z) = \sum_{n = 0}^\infty a_n (z - z_0)^n$$
+we see that the coefficient of $(z - z_0)^{-1}$ in the expansion for $g$ is $a_0 = g(z_0)$. We can easily compute this, giving us
+$$res(f, z_0) = \lim_{z \to z_0} (z - z_0)f(z)$$
+If we write $f$ as the quotient of two holomorphic functions $f = \frac{P}{Q}$ then we find that
+$$res(f, z_0) = \lim_{z \to z_0} (z - z_0) \frac{P(z)}{Q(z)} = \lim_{z \to z_0} \frac{P(z)}{\frac{Q(z) - Q(z_0)}{z - z_0}} = \frac{P(z_0)}{Q'(z_0)} $$
+\end{example}
+\begin{example}
+    We generalise the above to compute the residue at a pole of any order.
+    Suppose $f$ has a pole of order $n$ at $z_0$. This means we can write
+    $$f(z) = \frac{1}{(z - z_0)^n} g(z)$$
+    where $g(z)$ is holomorphic near $z_0$ and $g(a) \neq 0$. Since $g$ is holomorphic we can write
+    $$g(z) = \sum_{m = 0}^\infty a_m (z - z_0)^m$$
+    Then we know that $res(f, z_0) = a_{n - 1}$. We also know that
+    $$ a_{n - 1} = \frac{g^{(n - 1)}(z_0)}{(n - 1)!} $$
+    Since $g(z) = (z - z_0)^n f(z)$ we get
+    $$res(f, z_0) = \frac{1}{(n - 1)!} \frac{d^{n - 1}}{dz^{n - 1}}[(z - z_0)^n f(z)]\bigg|_{z = z_0} = \frac{1}{(n - 1)!} \lim_{z \to z_0} \frac{d^{n - 1}}{dz^{n - 1}} [(z - z_0)^n f(z)]$$
+    
+\end{example}
+\begin{example}
+Let us consider a very concrete example. Suppose we have
+$$ f(z) = \frac{e^{iz}}{z(z^2 + 1)^2} $$
+and we want to compute $res(f, i)$. Since $i$ is not a simple pole, we can't use the simple formula found in \autoref{eg:residue-of-quotient}. We can, however, compute residues by finding the Laurent expansion of $f$ (which is also a fairly common and occasionally easy way of computing residues).
+
+First we substitute $z = i + \zeta$ so that we can center everything at 0.
+Then we see that
+\begin{align*}
+    f(i + \zeta) &= \frac{e^{i(i + \zeta)}}{(i + \zeta)((i + \zeta)^2 + 1)^2}\\
+    &= \frac{e^{-1 + i\zeta}}{(i + \zeta)(-1 + 2i\zeta + \zeta^2 + 1)^2}\\
+    &= \frac{e^{-1 + i\zeta}}{\zeta^2(i + \zeta)(2i + \zeta)^2}
+\end{align*}
+
+We will the expansion for each expression individually. For example,
+$$ e^{-1 + i\zeta} = e^{-1} e^{i \zeta} = e^{-1} \left(1 + i \zeta + \frac{(i\zeta)^2}{2} + \cdots \right) $$
+Similarly
+$$ (i + \zeta)^{-1} = -i(1 - i\zeta)^{-1} = -i(1 + i\zeta + (i\zeta)^2 + \cdots) $$
+Finally we have 
+\begin{align*}
+    (2i + \zeta)^{-2} &= -\frac{1}{4} \left( 1 - \frac{i}{2} \zeta \right)^{-2}\\
+    &= -\frac{1}{4} \cdot -2i \frac{d}{d\zeta} \left( 1 - \frac{i}{2} \zeta \right)^{-1}\\
+    &= -\frac{1}{4} \cdot -2i \frac{d}{d\zeta} \left( 1 + \frac{i}{2} \zeta + \left( \frac{i}{2} \zeta \right)^2 + \cdots \right)\\
+    &= -\frac{1}{4} \frac{d}{d\zeta}(-2i + \zeta  + \frac{i}{2}\zeta^2 + \cdots)\\
+    &= -\frac{1}{4} (1 + i \zeta + \cdots )
+\end{align*}
+Then the product of the three expansions above is 
+$$ \frac{i}{4e} (1 + 3i\zeta + \cdots ) $$
+Thus when we multiply this with $\zeta^{-2}$ (the only remaining expression in $f$) we see that the coefficient of $\zeta^{-1}$ is
+$$ \frac{i}{4e} \cdot 3i = - \frac{3}{4e} $$
+Thus we conclude that
+$$ res(f, i) = - \frac{3}{4e} $$
+\end{example}
+\begin{example}
+Suppose $f$ is a meromorphic function in a neighbourhood of $z = a$ and we want to compute $res(\frac{f'}{f}, a)$. Since $f$ is meromorphic we know that $f(z) = (z - a)^k g(z)$ for some integer $k$ and some holomorphic function $g$ where $g(a) \neq 0$. Then using the product rule we compute that
+$$ \frac{f'}{f} = \frac{k}{z - a} + \frac{g'}{g} $$
+From this it is easy to compute the residue of $\frac{f'}{f}$ at $a$. Recall that we simply need to find the $a_{-1}$ coefficient which is the coefficient of $(z - a)^{-1}$ in this case. We know that $\frac{g'}{g}$ is holomorphic in a neighbourhood of $a$ since $g(a) \neq 0$. Therefore its expansion around $a$ can only have non-zero coefficients for the positive indices. This means the only contribution for $(z - a)^{-1}$ comes from the first term. Hence we conclude that
+$$ res\left( \frac{f'}{f}, a \right) = k $$
+\end{example}
+Note in the final example that if $f$ has a zero at $a$ then $k$ is positive an if $f$ has a pole at $a$, $k$ is negative. This more or less immediately gives us the following result.
+\begin{theorem}[Argument Principle]
+Let $f(z)$ be a non-constant meromorphic function in an open set $\Omega \subset \C$. Let $K$ be a compact set with oriented boundary $\Gamma$ in $\Omega$. Suppose $f(z)$ does not take the value $a$ on $\Gamma$ and that it has no poles on $\Gamma$. Then
+$$ \frac{1}{2\pi i} \int_{\Gamma} \frac{f'(z)}{f(z) - a}dz = Z - P $$
+where $Z$ is the number of zeroes of $f(z) - a$ in $K$ (counted with multiplicity) and $P$ is the number of poles of $f(z)$ in $K$ (also counted with multiplicity).
+\end{theorem}
+\begin{proof}
+The proof follows quite readily from the Residue Theorem and the last example above. By the Residue Theorem, we know that the integral of a meromorphic function over the boundary of a compact set can be found summing the residues on the singular points that lie in the compact set. We want to apply this result to the meromorphic function $\frac{f'(z)}{f(z) - a}$. We see that the singularities of this function are exactly the zeroes of $f(z) - a$ and the poles of $f(z)$. By the above example, the zeroes of $f(z) - a$ contribute a positive amount to the residue (counted with multiplicity) and the poles contribute a negative amount (again, with multiplicity). 
+\end{proof}
+The argument principle highlights why integrating $\frac{f'}{f}$ is important. Another way of seeing why its important is to consider what the integral actually is. Suppose $\gamma$ is an oriented circle centered at a point. Then
+$$\int_{\gamma} \frac{f'}{f}dz = \int_{f \circ \gamma} \frac{1}{z} dz = 2\pi iw(f \circ \gamma, 0)$$
+where the first equality follows from substituting $w = f(z)$ and the second equality is a definition. Thus the integral gives us a way to compute the number of zeroes that lie within the disk or any region whose boundary is a simple closed curve. 
+
+\begin{theorem}
+Let $f(z)$ be a non-constant holomorphic function in a neighbourhood of $z = z_0$ where $z_0$ is a root of order $k$ of $f(z) - a$ for some $a \in \C$. Then for every sufficiently small neighbourhood $U$ of $z_0$ and every $b$ sufficiently close to $a$ (with $b \neq a$), $f(z) - b$ has $k$ simple roots in $U$.
+\end{theorem}
+\begin{proof}
+We take $U$ small enough so that $f(z) - a$ has no zeroes but $z_0$ and $f'(z) \neq 0$ for $z \neq z_0$ in a closed disk centered at $z_0$ . Let $\gamma$ be the boundary of this disk. 
+
+Note that for any $b$
+$$ \frac{1}{2\pi i} \int_{\gamma} \frac{f'(z)}{f(z) - b}dz = \frac{1}{2\pi i} \int_{f \circ \gamma} \frac{1}{w - b} dw $$
+where we substitute $w = f(z)$. This is simply the winding number $w(f \circ \gamma, b)$. But we know that the winding number is constant along connected components in the complement of the closed curve. Thus we need $b$ close enough to $z_0$ to that the integral above remains constant.
+
+In this case we know that 
+$$ \frac{1}{2\pi i} \int_{\gamma} \frac{f'(z)}{f(z) - b} dz = k $$
+since that is the value of the integral when $b = z_0$. Then by the argument principle, we conclude that $f(z) = b$ has $k$ roots inside $\gamma$. Furthermore these roots have to be simple since we assume that $f'(z)$ was non-zero for $z \neq z_0$.
+\end{proof}
+
+\begin{theorem}[Rouché's Theorem]
+Suppose $f(z), g(z)$ are holomorphic in an open subset $\Omega$. Let $K$ be a compact set with oriented boundary $\Gamma$ in $\Omega$. If
+$$ \abs{f(z)} > \abs{g(z)} $$
+on $\Gamma$ then $f(z)$ and $f(z) + g(z)$ have the same number of zeros in $K$, counted with multiplicity (in other words the dominant function determines the number of zeroes of the sum).
+\end{theorem}
+\begin{proof}
+We of course want to use the argument principle but that would only tell us about zeros in the interior of $K$. In principle, it seems like we might miss zeros that lie on $\Gamma$ itself. However, the inequality guarantees that $f$ and $g$ have no zeros on $\Gamma$.
+
+Define $h = f + g$. Then we know that 
+$$\abs{f - h} < \abs{f}$$
+Dividing both sides of the inequality by $f$ (which recall is non-zero on $\Gamma$), we see that 
+\begin{align*}
+    \abs{1 - \frac{h(z)}{f(z)}} < 1
+\end{align*}
+on $\Gamma$. This means that $F(z) := \frac{h(z)}{f(z)}$ takes values in $\abs{z - 1} < 1$ the unit disk centered at 1. Now consider
+$$ \frac{1}{2\pi i} \int_{\Gamma} \frac{F'}{F}dz $$
+On one hand, by the argument principle we know this is the number of zeros of $F$ minus the number of poles of $F$. But the zeros of $F$ are exactly the zeros of $h$ and the poles of $F$ are exactly the zeros of $f$. Thus if we could show that the above integral is necessarily 0 we would be done.
+
+We know that $\Gamma$ is the disjoint union of closed curves. Thus the integral above is the sum over the integral over closed curves $\gamma$ for every $\gamma$ in $\Gamma$. Moreover 
+$$ \frac{1}{2\pi i} \int_\gamma \frac{F'}{F} dz = \frac{1}{2\pi i} \int_{F \circ \gamma} \frac{d\zeta}{\zeta} $$
+substituting $\zeta = F(z)$. This is exactly $w(F \circ \Gamma, 0)$. Since $F \circ \Gamma$ lies in $\abs{z - 1} < 1$, the origin will never lie within the curve and hence the winding number is always 0. Thus the integral above is indeed 0, as desired.   
+\end{proof}

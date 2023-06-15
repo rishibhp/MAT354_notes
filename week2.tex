@@ -1,0 +1,194 @@
+\subsection{Order 2 rational functions}
+As usual when mathematicians find a new thing to play with, they want to know how many of the thing there are. In this case, we want to know how many order 2 rational functions there are, up to a change of coordinates. Since we are working on the Riemann sphere the change of coordinate functions are given by fractional linear transformations. Remarkably (and rather delightfully), we will find that there are essentially 2 kinds of such functions.
+
+Suppose we have a rational function $R(z)$ of order 2. We know then, it must have 2 poles. There are two cases to consider: either the function has one double pole $\beta$ or it has two distinct poles $a, b$.
+
+We begin by considering the first case of having a rational function with a double pole. First we move the pole to infinity by considering $R\left( \beta + \frac{1}{\zeta} \right)$ which is a rational function in $\zeta$ and has a double pole at $\infty$. A rational function with a double pole at infinity is simply a quadratic so now we have a function of the 
+$$ w = az^2 + bz + c $$
+To be precise we should have a function in $\zeta$ we have relabeled the variables for convenience. By completing the square we see that 
+$$ w = a \left( z + \frac{b}{2a} \right)^2 - \frac{b^2}{4a} + c $$
+We rearrange this to get 
+$$ w + \frac{b^2}{4a} - c = a \left( z + \frac{b}{2a} \right)^2 $$
+If we relabel $w_1 := w + \frac{b^2}{4a} - c$ and $z_1 := \sqrt{a} \left( z + \frac{b}{2a} \right)$ we have an equation of the form 
+$$w_1 = z_1^2$$
+This means that any rational function of order 2 with a double pole can be written as the simplest possible quadratic, $w = z^2$ (if we change coordinates appropriately). 
+
+Now suppose the rational function has distinct poles $a, b$. We first compose this function with 
+$$ \frac{z - b}{z - a} $$
+to move the poles to $\infty$ and $0$ respectively. Such a rational function can be written in the form
+$$ w = Az + B + \frac{C}{z} $$
+where $A, B, C$ are some constants. We know this is the form of the resulting function by partial fraction decomposition. The partial fraction decomposition allows us to write a rational function as a sum of rational functions where each term in the sum only has one distinct pole. Thus the linear term comes from the pole at $\infty$ and the inverse term comes from the pole at $0$. Suppose we take $z' = \sqrt{\frac{A}{C}} z$. Then
+\begin{align*}
+    w = A \left( \frac{\sqrt{C}}{\sqrt{A}} z'\right) + B + C \left( \frac{\sqrt{A}}{\sqrt{C} z'} \right)\\
+    w - B = \sqrt{AC} \left(z' + \frac{1}{z'} \right)
+\end{align*}
+Much like before we can simplify this to the case
+$$ w_1 = z_1 + \frac{1}{z_1} $$
+by taking $w_1 := \frac{w - B}{\sqrt{AC}}$ and $z_1 := z'$. 
+
+Therefore every order 2 rational function is (basically) of the form $w = z^2$ or $w = z + \frac{1}{z}$.
+
+\subsection{Fractional Linear Transformations}
+Unfortunately the classification for order 1 rational functions, which is to say fractional linear transformations, is not nearly as nice (maybe this makes sense since these maps are homeomorphisms of the Riemann sphere which seems like a rather complicated, or dare I say complex, object). Besides, in this case the classification needs to be a bit different anyway since it wouldn't make sense to look at all fractional linear transformations up to fractional linear transformations. With all that out of the way, we \textit{can} say some things about them.
+
+\begin{proposition}\label{prop:frac-lin-trans-decompose}
+Every fractional linear transformation is a composition of translation, homothety and inversion. 
+\end{proposition}
+\begin{proof}
+Suppose we have 
+$$w = S(z) = \frac{az + b}{cz + d}$$
+with $ad - bc \neq 0$. Suppose $c$ is 0. Then we can write $w = az + b$ (with some relabeling of variables). This is clearly a composition of a homothety and translation.
+
+Suppose $c \neq 0$. Then
+\begin{align*}
+    \frac{az + b}{cz + d} = \frac{\frac{a}{c} \left( z + \frac{d}{c} \right) + \frac{bc^2 - ad}{c^2}}{c \left(z + \frac{d}{c} \right)} = \frac{a}{c^2} + \frac{bc^2 - ad}{c^2} \cdot \frac{1}{z + \frac{d}{c}}
+\end{align*}
+In this formulation, it is apparent that the map is indeed a composition of translation, homothety and inversion.
+\end{proof}
+
+As mentioned previously, fractional linear transformations are also useful for understanding the geometry of the Riemann sphere. But first we need a few preliminary results.
+\begin{lemma}
+Given any 3 distinct points $z_2, z_3, z_4$ in $S^2$, there is a unique fractional linear transformation $S$ that maps these points to $(1, 0, \infty)$ respectively.
+\end{lemma}
+\begin{proof}
+Existence of such a fractional linear transformation can be seen by simply defining it:
+$$ S(z) = \left( \frac{z_2 - z_3}{z_2 - z_4} \right)^{-1} \frac{z - z_3}{z - z_4} $$
+There are a few degenerate cases to consider (namely when one of the points is $\infty$). 
+\begin{align*}
+    z_2 = \infty, &S(z) = \frac{z - z_3}{z - z_4}\\
+    z_3 = \infty, &S(z) = \frac{z_2 - z_4}{z - 4}\\
+    z_4 = \infty, &S(z) = \frac{z - z_3}{z_2 - z_3}
+\end{align*}
+
+In order to see uniqueness, let $T$ be any linear transformation that maps $z_2, z_3, z_4$ to $1, 0, \infty$ respectively. Then note $S \circ T^{-1}$ is also a fractional linear transformation, but one that fixes $1, 0$ and $\infty$.
+Since it is a fractional linear transformation, we can write
+$$(S \circ T^{-1})(z) = \frac{az + b}{cz + d}$$
+The fact that $0$ is fixed implies that $b = 0$ and $\infty$ being fixed implies that $c = 0$. Thus we are left with a map of the form $(S \circ T^{-1})(z) = \alpha z$. By considering $(S \circ T^{-1})(1)$ we conclude that $\alpha = 1$ and $S \circ T^{-1}$ is the identity. Therefore $S = T$ as desired. 
+\end{proof}
+Now we define a quantity used often in geometry.
+\begin{definition}[Cross-ratio]
+Given 4 (distinct) points on $S^2$, we define $$(z_1:z_2:z_3:z_4) := S(z_1)$$ where $S$ as before is the (unique) linear transformation sending $z_2, z_3, z_4$ to $1, 0, \infty$ respectively. This quantity is known as the cross-ratio
+\end{definition}
+
+The cross-ratio has some delightful properties.
+\begin{theorem}\label{thm:cross-ratio-preserve}
+If $z_1, z_2, z_3, z_4 \in S^2$ are distinct points and $T$ is a fractional linear transformation, then $(Tz_1: Tz_2 : Tz_3: Tz_4) = (z_1: z_2: z_3: z_4)$.
+\end{theorem}
+\begin{proof}
+Let $S(z) =(z: z_2: z_3:z_4)$. Note then $ST^{-1}$ maps $Tz_2, Tz_3, Tz_4$ to $(1, 0, \infty)$ respectively. Therefore
+$$ (Tz_1: Tz_2 : Tz_3: Tz_4) = ST^{-1}(Tz_1) = S(z_1) = (z_1: z_2: z_3: z_4) $$
+\end{proof}
+\begin{theorem}\label{thm:cross-ratio-real}
+If $z_1, z_2, z_3, z_4 \in S^2$ are distinct points then $(z_1:z_2:z_3:z_4)$ is real if and only if the four points lie on a circle or a line in the complex plane.
+\end{theorem}
+\begin{proof}
+Suppose we map $1, 0, \infty$ to the points $z_2, z_3, z_4$ respectively via a fractional linear transformation. As we've seen, fractional linear transformations are completely determined by the image of 3 points. Let us call the map above then $T^{-1}$. Consider the map $z \mapsto (z:z_2:z_3:z_4)$ which must be $T(z)$ (since $T(z_2) = 1, T(z_3) = 0$ and $T(z_4) = \infty$ by construction). Therefore $(z:z_2:z_3:z_4) = T(z)$ is real if $z \in T^{-1}(\R)$ and non-real otherwise. 
+
+Thus we want to show that the image of the real line under a fractional linear transformation is a circle or a line. We do this by assuming $T$ is a fractional linear transformation and consider what conditions are forced on $w$ if $Tw$ is real.
+In other words we have
+\begin{align*}
+    \frac{aw + b}{cw + d} &= \frac{\ol{a} \ol{w} + \ol{b}}{\ol{c} \ol{w} + \ol{d}}\\
+    (aw + b)(\ol{c} \ol{w} + \ol{d}) &= (\ol{a} \ol{w} + \ol{b})(cw + d)
+\end{align*}
+which we can rearrange this to
+\begin{align*}
+    (a \ol{c} - \ol{a} c) \abs{w}^2 + (a\ol{d} - \ol{b}c)w - (\ol{a}d - b\ol{c})\ol{w} + b\ol{d} - \ol{b}d = 0
+\end{align*}
+We see that the coefficient of $\abs{w}^2$ and the constant term is purely imaginary. The sum of the central two terms is also imaginary. So we can divide everything by $i$ to get a purely real equation. Thus if $a\ol{c} - \ol{a}c$ is non-zero we get a circle and if it is zero, we get a line.
+
+Of course, what we want is slightly stronger. We want to be able to map the real line to \textit{any} line or circle. It is not immediate (at least to me) that this can be done. For this we can use the previous theorem which allows us to write any fractional linear transformations as a composition of simpler maps. It is easy to map the real line to any other line with $f(z) = az + b$ by choosing $a, b$ appropriately. Next recall from \autoref{prop:frac-lin-trans-decompose} that we can effectively write a fractional linear transformation as 
+\begin{equation*}
+    f(z) = \gamma + \beta \cdot \frac{1}{z + \alpha}
+\end{equation*}
+(with some relation between $\alpha, \beta, \gamma$). First I claim that the map $\frac{1}{z +\alpha}$ sends the real line to a circle (assuming $\alpha \neq 0$) where the radius of the circle is purely determined by the imaginary part of $\alpha$. Suppose $\alpha := a + ib$. Then
+\begin{align*}
+    \frac{1}{z + a + ib} = \frac{(z + a)}{(z + a)^2 + b^2} + i \frac{-b}{(z + a)^2 + b^2}
+\end{align*}
+Calling the real and imaginary components $u, v$ respectively we see that
+$$ u^2 + \left( v + \frac{1}{2b} \right)^2 = \frac{b^2}{4} $$
+Thus we can obtain a circle of any radius by choosing $\alpha$ appropriately and move the center of this circle as desired by choosing $\gamma$ appropriately.
+\end{proof}
+
+With these two facts about cross-ratios, we get the following theorem
+\begin{theorem}
+The image of a circle or line under a fractional linear transformation $T$ is a circle or line. Moreover, given a pair of circles or lines, there exists a fractional linear transformation taking one to the other.
+\end{theorem}
+\begin{proof}
+Suppose we are given a circle or line. Choose 4 distinct points on it. The cross-ratio of these 4 points is real by \autoref{thm:cross-ratio-real}. By \autoref{thm:cross-ratio-preserve}, we see that the cross-ratio remains real after applying a fractional linear transformation thus the image is also a circle or line. This shows the first statement.
+
+The second statement is easily seen as well. Choose 3 points $z_2, z_3, z_4$ on the first circle/line and 3 points $w_2, w_3, w_4$ on the second circle/line. There is a fractional linear transformation $T$ taking $z_2, z_3, z_4$ to $1, 0, \infty$ respectively and a fractional linear transformation $S$ taking $w_2, w_3, w_4$ to $1, 0, \infty$ as well. Then $S^{-1}T$ mapping $z_2, z_3, z_4$ to $w_2, w_3, w_4$ is the desired map (we know the image of the map is a circle or line containing $w_2, w_3, w_4$. But a circle or line is uniquely determined by 3 points so we know the image must be the desired circle/line).
+\end{proof}
+
+\section{Holomorphic Functions}\label{sec:holomorphic-functions}
+Suppose $f$ is a complex-valued function on an open set $\Omega \subset \C$. We say $f$ is holomorphic at a point $z \in \Omega$ if 
+$$ \lim_{h \to 0} \frac{f(z + h) - f(z)}{h} $$
+exists. In other words, we can write
+$$ f(z + h) - f(z) = ch + \phi(h)h $$ where $\lim_{h \to 0} \phi(h) = 0$.
+
+If we write $z = x + iy, f = u + iv, c = a + ib$ and $h = \xi + i \eta$ then the derivative is given by the map
+\begin{align*}
+    h &\mapsto ch\\
+    \matrix{\xi \\ \eta} &\mapsto \matrix{a & -b\\b & a} \matrix{\xi \\ \eta}
+\end{align*}
+Note that the determinant of the Jacobian is $\abs{f'(x)}^2$
+Writing the Jacobian in terms of partial derivatives we get some differential equations:
+$$ \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}; \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} $$
+This means that being holomorphic is the same as being differentiable as a map from $\R^2$ to $\R^2$ \textit{and} satisfying the above differential equation (we will see that is a very strong condition that has far-reaching consequences). These equations are known as the \textit{Cauchy-Riemann equations}. We could equivalently write them more succinctly as
+$$ \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y} = 0 $$
+
+Recalling from multivariable calculus, the differential of $f$ is
+$$df = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy$$
+Taking $f$ to be $f(z) = z$ and $f(z) = \ol{z}$ we find that
+\begin{align*}
+    dz &= dx + idy\\
+    d\ol{z} &= dx - idy
+\end{align*}
+which allows us to write
+$$ dx = \frac{dz + d\ol{z}}{2}, dy = \frac{dy + d\ol{y}}{2} $$
+This motivates the following definitions:
+\begin{align*}
+    \frac{\partial f}{\partial z} &:= \frac{1}{2} \left( \frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y} \right)\\
+    \frac{\partial f}{\partial \ol{z}} &:= \frac{1}{2} \left( \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y} \right)
+\end{align*}
+as it allows us to write
+$$ df = \frac{\partial f}{\partial z} dz + \frac{\partial f}{\partial \ol{z}} d\ol{z} $$
+Although one can can think of these definitions as notational shorthand, we will find that much like in the real case $\frac{\partial }{\partial z}$ and $\frac{\partial}{\partial \ol{z}}$ span the tangent space while $dz$ and $d\ol{z}$ span the cotangent space. Also like the real case, we will see that these bases are dual of one another.
+
+The above definitions also mean that the Cauchy-Riemann equations are equivalent to saying 
+$$ \frac{\partial f}{\partial \ol{z}} = 0 $$
+Roughly speaking, this means that holomorphic functions are independent of conjugation or only depend on $z$ rather than $\ol{z}$. 
+
+Related to holomorphic functions are harmonic functions.
+\begin{definition}[Harmonic Functions]
+A function $f$ on $\C$ that is complex- or real-valued is called \textit{harmonic} if $f$ is $C^2$ and
+$$ \frac{\partial^2 f}{\partial z \partial \ol{z}} = 0 $$
+This is equivalent to saying
+$$ \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = 0 $$
+if we think of $f$ as a function on $\R^2$. 
+\end{definition}
+\begin{remark}
+The operator $ \Delta := \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} $ is called the Laplacian or the Laplace operator.
+\end{remark}
+One might think that holomorphic functions are harmonic and indeed we will find this to be the case. However, this is not immediate since we do not know that if a function is holomorphic it is also $C^2$.
+
+\begin{proposition}
+Given a function $f$ on $\C$ we have
+$$ \frac{\partial f}{\partial \ol{z}} = 0 \Leftrightarrow \frac{\partial \ol{f}}{\partial z} = 0 $$
+\end{proposition}
+\begin{proof}
+It suffices to show that 
+$$ \ol{\frac{\partial f}{\partial \ol{z}}} = \frac{\partial \ol{f}}{\partial z} $$
+By definition we have that 
+$$ \frac{\partial f}{\partial \ol{z}} = \frac{1}{2} \left( \frac{\partial f}{\partial x} + i\frac{\partial f}{\partial y} \right) $$
+Taking conjugates of both sides we get
+$$ \ol{\frac{\partial f}{\partial \ol{z}}} = \frac{1}{2} \left( \ol{\frac{\partial f}{\partial x}} - i \ol{\frac{\partial f}{\partial y}} \right) = \frac{1}{2} \left( \frac{\partial \ol{f}}{\partial x} - i \frac{\partial \ol{f}}{\partial y} \right) = \frac{\partial \ol{f}}{\partial z} $$
+\end{proof}
+\begin{lemma}
+If $f(z)$ is holomorphic on a connected open set and $f'(z) \equiv 0$ then $f$ is constant.
+\end{lemma}
+\begin{proof}
+We have that 
+$$ df = \frac{\partial f}{\partial z}dz + \frac{\partial f}{\partial \ol{z}}d \ol{z} $$
+Holomorphism implies that $\frac{\partial f}{\partial \ol{z}}$ is 0 and by assumption on the derivative we have that $\frac{\partial f}{\partial z}$ is 0. Therefore $df = 0$ and $f$ is constant.
+\end{proof}
+

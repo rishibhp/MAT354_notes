@@ -1,0 +1,48 @@
+Cauchy's Integral Formula also tells us that holomorphic functions have the mean value property. 
+\begin{definition}[Mean Value Property]
+If a function $f$ has the mean value property, then mean value of $f$ along the boundary of any disk is equal to the value of $f$ at the center. In other words
+$$f(z) = \frac{1}{2\pi} \int_{0}^{2\pi} f(z + re^{i\theta}) d\theta$$
+for sufficiently small $r$.
+\end{definition}
+
+An important consequences of the mean value property is the maximum modulus principle.
+\begin{lemma}[Maximum Modulus Principle]
+Let $f$ be a continuous function in $\Omega \subset \C$ which has the mean value property. Then if $\abs{f}$ has a local max at some point $a$ in $\Omega$, then $f$ is constant in a neighbourhood of $a$.
+\end{lemma}
+\begin{proof}
+$$ M(r) := \sup_{\theta \in [0, 2\pi]} \abs{f(a + re^{i\theta})} \leq f(a) \leq M(r) $$
+The first inequality follows from the local max being at $a$. The second inequality follows from the mean value property. Namely, $f(a)$, being the mean value of the boundary of the disk, is at most as large as the largest value on the boundary. But this means that $f(a) = M(r)$. 
+
+Then we define $g(z) = \Re(f(a) - f(z)) = f(a) - \Re(f(z))$ since $f(a)$ is real. There are two important things to note about $g$. First it is non-negative on the circle $\abs{z - a} = r$. This follows from the fact $f(a) = M(r)$ and the fact that $\Re(f(z)) \leq \abs{f(z)}$. 
+Thus we have $0 \leq f(a) - \abs{f(z)} \leq f(a) - \Re(f(z))$.
+
+The second important thing about $g$ is $g(z) = 0$ if and only if $f(z) = f(a)$. It is clear that if $f(z) = f(a)$ then $g(z) = 0$ since $f(a)$ is real. Conversely suppose $g(z) = 0$. This means that $f(a) = \Re(f(z))$. Since $f(a) = M(r)$, this means there is some $z'$ on the circle $\abs{z' - a} = r$ such that $\Re(f(z)) = \abs{f(z')}$. This immediately means that $\abs{f(z)} \geq \abs{f(z')}$ (again the modulus is at least as big as the real part). On the other hand by definition, $z'$ is where $\abs{f}$ reaches its largest modulus on the circle $\abs{z - a} = r$. Therefore we also have $\abs{f(z)} \leq \abs{f(z')}$ which gives us
+$$\abs{f(z)} = \abs{f(z')} = f(a)$$
+Since $\Re(f(z)) = f(a)$ and $\abs{f(z)} = f(a)$ we necessarily have $f(z) = f(a)$ (in particular the imaginary part of $f(z)$ must be 0).
+
+Finally, we observe that $g(a) = 0$. This means that the mean value on the circle $\abs{z - a} = r$ is 0 (this uses the fact that $g$ also has the mean value property. This is because if $f$ satisfies the mean value property then so do $\Re(f)$ and $\Im(f)$ and $f + c$ for any constant $c$). But since $g$ is continuous and non-negative on the circle, the mean value can only be 0 if it is identically 0 on the circle. By the previous paragraph, this means that $f(z) = f(a)$ on $\abs{z - a} = r$. Since this holds for all sufficiently small $r$, we find that $f$ is locally constant on a small disk.
+\end{proof}
+The following is a useful corollary of the maximum modulus principle and is in fact how we use the principle most often.
+\begin{corollary}\label{cor:max-mod-prin-cor}
+Suppose $\Omega$ is a bounded domain in $\C$. Let $f(z)$ be a continuous function on $\ol{\Omega}$ the closure of $\Omega$. 
+Suppose also that $f$ has the mean value property in $\Omega$. Define
+$$ M := \sup_{z \in \Bd(\Omega)} \abs{f(z)} $$
+Then $\abs{f(z)} \leq M$ for all $z \in \ol{\Omega}$ and if $\abs{f(z_0)} = M$ for some $z_0 \in \Omega$ then $f$ is constant.
+\end{corollary}
+\begin{proof}
+Let $M' := \sup_{z \in \ol{\Omega}} \abs{f(z)}$. Since $\ol{\Omega}$ is compact, we know that the supremum is actually achieved. In other words, there is some $a \in \ol{\Omega}$ such that $\abs{f(a)} = M'$. If $a$ is on the boundary $\Bd(\Omega)$, then we are done. So suppose $a$ is in $\Omega$. Then by the maximum modulus principle, we get that $S := \{z \in \C : f(z) = f(a)\}$ is an open set. But this is also a closed set. Therefore $S = \Omega$.
+\end{proof}
+
+A very important result in complex analysis is Schwarz's lemma. Roughly speaking, it tells us that holomorphic functions from the disk to itself can't change distances too much. The lemma even allows us to classify all biholomorphisms from the disk to itself.
+\begin{theorem}[Schwarz's lemma]
+Suppose $f(z)$ is a holomorphic function from the unit disk to itself such that $f(0) = 0$. Then $\abs{f(z)} \leq \abs{z}$ for all $\abs{z} < 1$ and $\abs{f'(0)} \leq 1$. Moreover, if $\abs{f(z_0)} = \abs{z_0}$ for some non-zero $z_0$ or $\abs{f'(0)} = 1$ then $f(z) = \lambda z$ for some $\lambda$ on the unit circle.
+\end{theorem}
+\begin{proof}
+Since $f(0) = 0$, we conclude that $\frac{f(z)}{z}$ is holomorphic on the unit disk. This follows from the fact that $\frac{f(z)}{z}$ has a power series expansion. Namely if $f(z) = \sum_{n = 1}^\infty a_n z^n$ (note the constant term is necessarily 0 since $f(0) = 0$) then $\frac{f(z)}{z} = \sum_{n = 0}^\infty a_{n + 1} z^n$). Thus this fuction evaluates to $f'(0)$ at 0. 
+
+This means that if $\abs{z} = r < 1$ then
+$$ \abs{\frac{f(z)}{z}} = \frac{\abs{f(z)}}{r} < \frac{1}{r} $$
+By the corollary above, we conclude that this inequality holds for every $\abs{z} \leq r$ (not just on the circle). Taking the limit of both sides as $\abs{z} = r \to 1$, we conclude that 
+$$ \abs{\frac{f(z)}{z}} \leq 1 $$
+Moreover if this function achieves the maximum modulus, i.e. if $\abs{f(z_0)} = \abs{z_0}$ or $\abs{f'(0)} = 1$, it does so in the interior of the unit disk and therefore by the maximum modulus principle we know it is constant. Therefore $\abs{f(z)} = \abs{z}$ implying that $f(z) = \lambda z$ with $\abs{\lambda} = 1$.
+\end{proof}

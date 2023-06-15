@@ -1,0 +1,152 @@
+\begin{proposition}
+Suppose $f$ is a holomorphic function in a connected, open set $\Omega$. Then
+\begin{enumerate}
+    \item If $\abs{f(z)}$ is constant, then $f$ is constant.
+    \item If $\Re(f(z))$ is constant, then $f$ is constant.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+    1) By assumption $\abs{f(z)}^2 = f(z) \ol{f(z)}$ is constant. Thus we can differentiate both sides with respect to $z$ to conclude
+    $$0 = \frac{\partial f}{\partial z} \ol{f(z)} + f(z) \frac{\partial \ol{f}}{\partial z}$$
+    Using holomorphicity of $f$, we know the second term on the right is always 0, so
+    $$ \frac{\partial f}{\partial z} \ol{f(z)} = 0 $$
+    for all $z$. This means for any given point either $\frac{\partial f}{\partial z}$ is 0 or $\ol{f(z)}$ is 0. 
+    
+    By assumption $\ol{f(z)}$ is constant so it is either 0 everywhere or it is 0 nowhere. If it is 0 everywhere, then $f = 0$ and we are done. So suppose it is non-zero everywhere. Then $\ol{f}(z)$ is also non-zero everywhere. But this means that $\frac{\partial f}{\partial z} $ is 0 everywhere. By the previous lemma, this implies $f$ is constant.\\
+    
+    2) Suppose $\Re(f)$ is constant. We know that
+    $$ \Re(f(z)) = \frac{f(z) + \ol{f(z)}}{2} $$
+    thus we can, as before, differentiate both sides with respect to $z$ to conclude
+    $$ 0 = \frac{1}{2} \left( \frac{\partial f}{\partial z} + \frac{\partial \ol{f}}{\partial z} \right) $$
+    which immediately gives us
+    $$ \frac{\partial f}{\partial z} = 0 $$
+\end{proof}
+\begin{remark}
+In complex analysis, we work in connected open sets often enough to give them a special name: domain.
+\end{remark}
+
+\subsection{Mapping geometries}
+
+We now consider how the geometry of the plane is manipulated by holomorphic functions. Suppose $f$ is holomorphic at a point $z_0$. The tangent mapping of $f$ at $z_0$ is simply $w = cz$ where $c = f'(z_0)$. We know from previous discussion that if $c \neq 0$ then the tangent mapping preserves angles and orientation (it's a homothety). To capture this fact, we say that $f$ is \textit{conformal} at $z_0$ if $f'(z_0) \neq 0$. 
+
+Consider $w = f(z)$ in a connected, open set $\Omega$. Assume that $f$ is continuously differentiable as a map from $\R^2$ to $\R^2$ and that it's Jacobian is invertible at every point. Suppose $f$ preserves angles at every point of $\Omega$. This means that the tangent mapping of $f$ at any point is of the form $w = cz$ or $w = c\ol{z}$ (see \autoref{prop:linear-trans}). This implies that $\frac{\partial f}{\partial z} = 0$ or $\frac{\partial f}{\partial \ol{z}} = 0$ (the tangent mapping only depends on $z$ or $\ol{z}$ and not both). Note that both partial derivatives cannot be 0 at a point since this would prevent the Jacobian from being invertible. This means that the sets 
+$$ \left\{z \in \Omega: \frac{\partial f}{\partial z}(z) = 0 \right\}, \left\{z \in \Omega: \frac{\partial f}{\partial \ol{z}}(z) = 0 \right\} $$
+are disjoint. Moreover, since the derivatives are assumed to be continuous we know both the sets above are closed (recall that $\frac{\partial f}{\partial z}$ and $\frac{\partial f}{\partial \ol{z}}$ are just linear combinations of $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$). Hence we have two disjoint closed sets whose union is the connected set $\Omega$. Therefore one of the sets must be empty allowing us to conclude that either $\frac{\partial f}{\partial z}$ is 0 on $\Omega$ or $\frac{\partial f}{\partial \ol{z}}$ is. We know that if we have the latter case $f$ is holomorphic (since we only assume $f$ to be continuously differentiable as a map from $\R^2$ to $\R^2$, we don't immediately know that $f$ is holomorphic) and if we have the former case, we say that $f$ is \textit{anti-holomorphic}. In conclusion, we can say that a $C^1$ function $f: \R^2 \to \R^2$ preserves angles at every point of $\Omega$ if and only if $f$ is either holomorphic or anti-holomorphic.
+
+One of the delightful things about studying complex functions is that many of the theorems we have with real numbers (specifically for $\R^2$) can be imported quite readily. The theorem below is one such example.
+\begin{theorem}[Inverse Function Theorem]\label{thm:inv-func-thm}
+Suppose $f$ is holomorphic in a neighbourhood of $z_0$ and $f'(z_0) \neq 0$. Then there are neighbourhoods $U$ and $V$ or $z_0$ and $w_0 := f(z_0)$ respectively such that $f|U$ is a homeomorphism onto $V$ with inverse $g: f(U) \to U$. Moreover, $g$ is holomorphic and
+$$ g'(w) = \frac{1}{f'(g(w))} = \frac{1}{f'(z)} $$
+where $w = f(z)$.
+\end{theorem}
+\begin{proof}
+    We can more or less use the theorem in the context of real numbers to prove the complex case. The one wrinkle is that we need to know that if a function is holomorphic it is continuously differentiable (this is one of the assumptions of the real inverse function theorem). So let us assume this is indeed the case (something we will prove later). All that we need to do is check that the inverse $g$ is holomorphic.
+    
+    Since $f$ is holomorphic we know that
+    $$ f'(z) = \matrix{a &-b\\b & a} $$
+    Then 
+    $$ g'(w) = [f'(z)]^{-1} = \frac{1}{a^2 + b^2} \matrix{a & b\\-b & a} $$
+    This means $g$ satisfies the Cauchy-Riemann equations (see \autoref{sec:holomorphic-functions}) and is therefore holomorphic.
+\end{proof}
+
+\section{Complex Power Series}
+As in the real case, a power series is simply a map of the form
+$$ \sum_{n = 0}^{\infty} a_n (z - z_0)^n $$
+whenever the convergence makes sense. Since we are now working with complex numbers, we allow $a_n$ to be any element of $\C$. There are some strong analogues to the real case. For example, we have the following theorem.
+\begin{theorem}\label{thm:radius-of-conv}
+Given a series $\displaystyle \sum_{n = 0}^\infty a_n z^n$, there exists $0\leq R \leq \infty$ such that
+\begin{enumerate}
+    \item For every $r < R$, $\sum_{n = 0}^{\infty} a_n z^n$ converges uniformly and absolutely in disk $\abs{z} \leq r$
+    \item If $\abs{z} > R$, the series diverges and in fact, the terms of the series are unbounded
+    \item The derived series $\sum_{n = 1}^{\infty} n a_n z^{n - 1}$ has the same radius of convergence
+\end{enumerate}
+Finally, if we define a map $f$ where $f(z) := \sum_{n = 0}^\infty a_n z^n$ for $\abs{z} < R$ then $f$ and is holomorphic and $f'(z)$ is given by the derived series.
+\end{theorem}
+Consider the following examples:
+\begin{itemize}
+    \item $\displaystyle\sum_{n = 0}^{\infty} n! z^n$, $R = 0$ since the terms are unbounded otherwise
+    \item $\displaystyle \sum_{n = 0}^\infty \frac{z^n}{n!}$, $R = \infty$
+    \item $\displaystyle \sum_{n = 0}^{\infty} z^n$, $R = 1$
+    \item $\displaystyle \sum_{n = 0}^\infty \frac{1}{n^k} z^n$, $R = 1$ for any positive integer $k$
+\end{itemize}
+For all the above, we can use the ratio test to find the radius of convergence.
+
+\subsection{Exponential}
+We define the exponential map using its Taylor series. To be precise, we write
+$$ e^z := \sum_{n = 0}^\infty \frac{z^n}{n!} $$
+We saw above that the radius of convergence is $\infty$ hence this function is defined everywhere. It's also clear that 
+$$ \frac{\partial}{\partial z} e^z = e^z$$
+The usual rules for exponentiation like $e^{z + w} = e^z e^w$ also follow by using the above property of the derivative of $e^z$. Namely consider $g(z) = e^z e^{c - z}$. Then we see that
+$$ g'(z) = e^z e^{c - z} + e^z (-e^{c - z}) = 0 $$
+by using the product and chain rules. Therefore $g(z)$ is constant. In fact, this constant is $e^c$ which we find by evaluating $g$ at 0. Taking $c = z + w$ gets us the desired result.
+
+This seemingly simple result about exponentiation has very important consequences. Let $z = x + iy$. Then
+$$ e^{z} = e^{x + iy} = e^x e^{iy} $$
+By substituting $iy$ into the series expansion of $e^z$ we find that $e^{iy} = \cos(y) + i \sin(y)$ (we simply group the real and imaginary parts of the series together and recognise the Taylor series for $\sin$ and $\cos$). Note this immediately implies that $\abs{e^{iy}} = 1$ for all $y \in \R$. Therefore 
+$$ \abs{e^{x + iy}} = \abs{e^x e^{iy}} = e^x $$
+
+In fact consider the map $\phi(y) = e^{iy}$ on the real numbers. This is a group homomorphism whose image is the circle. Additionally its kernel is $2\pi\Z$. Therefore by the first isomorphism theorem we conclude that $\R/2\pi\Z \cong S^1 \subset \C$. In fact this is a homeomorphism. We know its a homeomorphism because its a continuous, bijective map between compact Hausdorff spaces. In fact the inverse map, $S^1 \to R^2/2\pi\Z$ has a special name called $\arg$. Note that in the real-numbers $\arg$ is \textit{not} well-defined. It is only well-defined up to multiples of $2\pi$. We will see that this has some interesting and important consequences. But first we will extend $\arg$ to be defined for all non-zero complex numbers by simply mapping those points to the unit circle. To be precise, we define
+$$ \arg(z) := \arg \left( \frac{z}{\abs{z}}\right) $$
+We can therefore write
+$$ z = \abs{z}e^{i \arg(z)} $$
+
+\subsection{Trigonometric Functions}
+Suppose $y$ is a real number. Then we know $e^{iy} = \cos(y) + i \sin(y)$. Therefore $\cos(y)$ is the real part of $e^{iy}$ which we can find by taking the sum of $e^{iy}$ with its conjugate and dividing the result by 2. This suggests a way of extending $\cos$ to $\C$. In particular, we define
+$$ \cos(z) := \frac{e^{iz} + e^{-iz}}{2} $$
+Similarly
+$$ \sin(z) := \frac{e^{iz} - e^{iz}}{2i} $$
+The usual statements about trigonometric functions still remain true. For example $\cos^2(z) + \sin^2(z) = 1$ and $\cos' = -\sin$ and $\sin' = \cos$. In fact the usual sum formulas hold as well
+\begin{align*}
+    \cos(z + w) &= \cos(z)\cos(w) - \sin(z)\sin(w)\\
+    \sin(z + w) &= \cos(z)\sin(w) + \sin(z)\cos(w)
+\end{align*}
+
+\subsection{Complex Log}
+We want $\log$ to be the inverse of the exponential. In other words we want to $\log(z)$ to be a solution to 
+$$ e^w = z $$
+We see that
+\begin{align*}
+    z &= \abs{z} e^{i \arg(z)}\\
+    &= e^{\log(\abs{z})} e^{i \arg(z)}\\
+    &= e^{\log(\abs{z}) + i \arg(z)}
+\end{align*}
+Therefore we want to say that 
+$$ \log(z) := \log\abs{z} + i \arg(z) $$
+Unfortunately since $\arg$ is not well-defined, $\log$ cannot be well-defined either. It is only unique up to multiples of $2\pi i$. With this restriction, we get some of the usual properties of $\log$ such as
+$$ \log(zz') = \log(z) + \log(z') \, \, \bmod 2\pi i $$
+
+We would like to however have a continuous version of $\log$ (and indeed $\arg$) which we can use for our analyses. This leads to the idea of branches.
+\begin{definition}[Branches]
+Let $f(z)$ be a continuous function in a connected open set $\Omega$. We say that $f(z)$ is a \textit{branch} of $\log(z)$ if for all $z \in \Omega$ we have
+$$ e^{f(z)} = z $$
+\end{definition}
+Later on, we will study what conditions on $\Omega$ allow branches of $\Omega$ to exist.
+
+\begin{lemma}
+Suppose there is a branch $f(z)$ of $\log(z)$ in a connected open set $\Omega$. Then any other branch has form $f(z) + 2k\pi i$ for some $k \in \Z$. Conversely, for all $k \in \Z$, $f(z) + 2k\pi i$ is a branch.
+\end{lemma}
+\begin{proof}
+    We want to show that two branches of $\log(z)$ always differ by the same multiple of $2\pi i$. So let $f$ and $g$ be 2 branches. Then
+    $$ h(z) = \frac{f(z) - g(z)}{2\pi i} $$
+    Since $h$ is continuous on a connected set, we know its image is connected as well. Note that the image of $h$ is in $\Z$ therefore there is only one point in the image implying that $h$ must be constant as desired. 
+\end{proof}
+We can likewise define a branch of $\arg(z)$ to be a continuous map $h$ on a connected open set such that 
+$$ z = \abs{z}e^{ih(z)} $$
+Note that any branch of $\arg(z)$ defines a branch of $\log(z)$ and vice versa.
+
+When a branch of $\log$ does exist, we want to say that it has many of the same properties that the usual $\log$ does. Hence we have the following proposition.
+\begin{proposition}
+If $f(z)$ is a branch of $\log(z)$ in a connected open set $\Omega$ then $f(z)$ is holomorphic and moreover
+$$f'(z) = \frac{1}{z}$$
+\end{proposition}
+\begin{proof}
+    We simply use the definition of being holomorphic and confirm the limit is $\frac{1}{z}$.
+    \begin{align*}
+        \lim_{h \to 0}\frac{f(z + h) - f(z)}{h} &= \lim_{h \to 0} \frac{f(z + h) - f(z)}{z + h - z}\\
+        &= \lim_{h \to 0} \frac{f(z + h) - f(z)}{e^{f(z + h)}-  e^{f(z)}}\\
+        &= \lim_{w \to f(z)} \frac{w - f(z)}{e^w - e^{f(z)}}\\
+        &= \frac{1}{e^{f(z)}}\\
+        &= \frac{1}{z}
+    \end{align*}
+    where for the third line we note that as $h \to 0$ we have $w := f(z + h) \to f(z)$ and fourth line we use that the derivative of the exponential is itself.
+\end{proof}

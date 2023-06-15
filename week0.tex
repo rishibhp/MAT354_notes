@@ -1,0 +1,46 @@
+\section{Complex Numbers}
+The set of complex numbers $\C$ is the collection of elements of the form $\alpha + i \beta$ where $\alpha, \beta$ are real numbers and $i$ is (defined to be) a solution $z^2 + 1 = 0$. The other solution to this quadratic is $-i$. One can imagine that it is difficult to distinguish between the two solutions. One of them we call $i$ and the other one then becomes $-i$ but it's not clear how to decide which one should be which. Ultimately, this is a somewhat arbitrary choice so we should be able to swap between the two solutions. This leads to the idea of conjugation. If $a = \alpha + i \beta$, we define the \textit{conjugate} of $a$ by
+$$\ol{a} := \alpha - i\beta$$
+The real numbers $\alpha$ and $\beta$ are called the real and imaginary parts of $a$ respectively.
+It is easy to verify that 
+$$ \ol{a + b} = \ol{a} + \ol{b} \text{ and } \ol{ab} = \ol{a}\ol{b} $$
+This means that addition and multiplication are not affected when we swap $i$ and $-i$. This is good news since it means that our choice of calling one of the solutions $i$ and the other $-i$ doesn't affect the algebraic structure in question.
+
+Using the conjugate, we can find the real and imaginary parts of a complex number quite easily.
+$$\Re(a) = \frac{a + \ol{a}}{2}, \ \Im(a) = \frac{a - \ol{a}}{2i}$$
+Additionally, we have the \textit{modulus} of a complex number
+$$ \abs{a} = \sqrt{\alpha^2 + \beta^2} = \sqrt{a \ol{a}} $$
+
+The familiar inequalities from analysis, the triangle inequality and Cauchy-Schwarz inequality still hold. So in particular we have
+\begin{align*}
+    \abs{a + b} &\leq \abs{a} + \abs{b}\\
+    \abs{\sum_{j = 1}^n a_j b_j}^2 &\leq \left( \sum_{j = 1}^n \abs{a_j}^2 \right) \left( \sum_{j = 1}^n \abs{b_j}^2 \right)
+\end{align*}
+
+\subsection{Operations of Complex Numbers}
+Addition of complex numbers is exactly vector addition (corresponding with the usual geometric intuition). Multiplication is a bit more interesting. Using the usual distributive laws and the definition of $i$ we get 
+$$(\alpha + i \beta)(\gamma + i \delta) = (\alpha \gamma - \beta \delta) + i(\beta \gamma + \alpha \delta)$$
+However, there is a nicer way of thinking about multiplication.
+First we note that any complex number $a = \alpha + i \beta$ can be written in polar coordinates with 
+\begin{align*}
+    \alpha &= r \cos \theta\\
+    \beta &= r \sin \theta
+\end{align*}
+where $r = \abs{a}$ and $\theta$ is the angle made with the positive real line (i.e. positive $x$-axis). We call $\theta$ the argument and note that it is only unique up to multiples of $2\pi$. 
+
+If we have $a = r_1 (\cos \theta_1 + i \sin \theta_1)$ and $b = r_2(\cos \theta_2 + i \sin \theta_2)$ then by using trigonometric identities, we find that 
+$$ab = r_1 r_2 (\cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2))$$
+Hence $\arg(ab) = \arg(a) + \arg(b)$ ($\bmod 2\pi$ if necessary). The immediately shows that 
+$$a^n = r^n (\cos(n \theta) + i \sin(n \theta))$$
+for all integers $n$. To be precise, this has only been shown for non-negative integers, but we can see it holds for all integers by noting that 
+$$ a^{-1} = r^{-1} \frac{1}{\cos \theta + i \sin \theta} = r^{-1}(\cos \theta - i \sin \theta) = r^{-1}(\cos(-\theta) + i \sin(-\theta)) $$
+
+The identity above also gives us de Moivre's formula
+$$ (\cos \theta + i \sin \theta)^n = \cos(n \theta) + i \sin (n \theta)) $$
+
+\subsection{n-th roots of unity}
+The roots of the polynomial $z^n - 1$ are called the $n$-th roots of unity. Using de Moivre's formula, we see that one root of unity is 
+$$\omega := \cos \left( \frac{2\pi}{n} \right) + i \sin \left( \frac{2\pi}{n} \right)$$
+and the remaining roots are $\omega^2, \omega^3, \dots, \omega^n$ since 
+$$\omega^k = \cos \left( k \cdot \frac{2\pi}{n} \right) + i \sin \left( k \cdot \frac{2\pi}{n} \right)
+$$

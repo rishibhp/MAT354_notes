@@ -1,0 +1,144 @@
+\section{Riemann Sphere}
+We will see that it is useful to work with $\C$ along with a point at $\infty$. In other words, we want to extend $\C$ to include $\infty$. There are some basic arithmetic properties we would like $\infty$ to have:
+\begin{itemize}[topsep=0pt, itemsep=0pt]
+    \item $a + \infty = \infty = \infty + a$ for all $a \in \C$
+    \item $a \cdot \infty = \infty = \infty \cdot a$ for $a \neq 0$
+    \item $\frac{a}{\infty} = 0$ for $a \neq \infty$
+    \item $\frac{a}{0} = \infty$ for $a \neq 0$
+\end{itemize}
+
+The way we are going to `deal' with infinity is by using stereographic projection. Recall the plane is homeomorphic to the sphere without a point, say the north pole. Thus the north pole becomes the point at infinity (under the homeomorphism given by stereographic projection). 
+
+To be a bit more precise, we will consider 2 charts from $S^2$ to $\C$
+$$ z = \frac{x + iy}{1 - t}, \ z' = \frac{x - iy}{1 + t} $$
+where the first is used for $S^2 \backslash \{N\}$ and second is used for $S^2 \backslash \{S\}$. Note then that 
+$$ zz' = \frac{x + iy}{1 - t} \cdot \frac{x - iy}{1 + t} = 1 $$
+Therefore the transition map from one chart to the other is 
+$$ z' = \frac{1}{z} $$
+
+To put it a bit informally, we will often think of $\infty = \frac{1}{0}$ so we will compute $f(\infty)$ by finding $f\left(\frac{1}{z}\right)$ and substituting $z = 0$. 
+
+In conclusion, the Riemann sphere will refer to the complex plane $\C$ with the point at infinity adjoined to it which we can identity with $S^2$ via stereographic projection which tells us the topology and such of the extended plane.
+
+\begin{center}
+    \rule{1in}{0.5pt}
+\end{center}
+
+Before we move on to talking about complex functions, a brief aside on why stereographic projection is a particularly nice homeomorphism. 
+
+\begin{lemma}
+Any circle in $S^2$ (the Riemann sphere) corresponds (uniquely) to a circle or straight line in $\C$.
+\end{lemma}
+\begin{proof}
+Any circle in $S^2$ is the intersection of a plane with the sphere. Say this plane is given by the points $(x, y, t)$ such that 
+$$ ax + by + ct = d $$
+Additionally we know that stereographic projection is given by 
+$$ (x, y, t) \mapsto z := \frac{x + iy}{1 - t} $$
+We would like to find out what happens to the points on the intersection above after they are mapped to the complex plane. In other words, we want to express the equation of the plane in terms of $z$ as the resulting equation will capture how this circle is transformed. We will do this by expressing $x, y, t$ entirely in terms of $z$. Another way of thinking about this is to note that by expressing the coordinates $x, y, t$ in terms of $z$ we are effectively computing the inverse of stereographic projection. Thus we are trying to determine what geometric objects on the complex plane are mapped to a circle on the sphere.
+
+Then we see that 
+$$ \abs{z}^2 = z \ol{z} = \frac{x + iy}{1 - t} \cdot \frac{x - iy}{1 - t} = \frac{1 + t}{1 - t} $$
+implying that 
+$$t = \frac{\abs{z}^2 - 1}{\abs{z}^2 + 1} \text{ or } 1 - t = \frac{2}{\abs{z}^2 + 1}$$
+Using these identities and considering the real/imaginary parts of $z$ we see that 
+$$ x = (1 - t) \cdot \frac{1}{2}(z + \ol{z}) = \frac{z + \ol{z}}{\abs{z}^2 + 1}$$
+and
+$$y = (1 - t) \cdot \frac{1}{2i} (z - \ol{z}) = \frac{z - \ol{z}}{i(\abs{z}^2 + 1)}$$
+Now that we can substitute this into the equation of the plane above to get 
+$$ a(z + \ol{z}) + \frac{b}{i}(z - \ol{z}) + c(\abs{z}^2 - 1) = d(\abs{z}^2 + 1) $$
+We can substitute $z = u + iv$ to further simplify this to
+$$(d - c)(u^2 + v^2) - 2au - 2bv + (d + c) = 0$$
+If $d = c$ then we get a line and if $d \neq c$, we get a circle. In order to see the latter statement, note we can complete the square to rearrange the above to 
+$$ \left(u - \frac{a}{d - c}\right)^2 + \left(v - \frac{b}{d - c}\right)^2 = \frac{a^2 + b^2 + c^2 - d^2}{(d - c)^2} $$
+The right hand side is only negative if the plane is very far from the origin since the distance between the plane and the origin is 
+$$\frac{\abs{d}}{\sqrt{a^2 + b^2 + c^2}} $$
+(see \href{https://mathworld.wolfram.com/Point-PlaneDistance.html}{here}).
+
+Finally, note that the correspondence between circles on the sphere and circles/lines in the complex plane is one-to-one since any of the latter objects can be written in the above form.
+\end{proof}
+
+\section{Rational functions}
+Ultimately what we want to build up to is of course differentiation of complex functions. But before that it is useful to study some simple examples of complex functions. The simplest examples of complex functions are polynomials and by extension their quotients, what we often call rational functions. Such functions can be differentiated `like normal' using combinations of the chain, product and quotient rule (where perhaps we think of the derivative as a formal operator acting on rational functions). 
+\subsection{Linear functions}
+The simplest possible complex functions are linear transformations, which we already know quite well from the study of linear algebra. For example, we know that all such maps $T$ are of the form $T(z) = az$ for some fixed $a \in \C$. Note that such maps are a composition of rotation and dilation. Therefore it preserves angles and orientation. Such maps are called \textit{homothetic}. 
+
+To be precise, the above maps are $\C$-linear. There are (of course) also maps that are not $\C$-linear but rather $\R$-linear. An example of such a map is the conjugation map $z \mapsto \ol{z}$. An $\R$-linear transformation of $\R^2$ is given by a matrix
+$$ \matrix{\alpha & \beta \\ \gamma & \delta} $$
+By identifying $\R^2$ with $\C$ we see that such a map is $\C$-linear if and only if $\alpha = \delta$ and $\gamma = -\beta$.\\
+
+As an exercise let us find all angle-preserving $\R$-linear transformations of $\C$.
+\begin{proposition}\label{prop:linear-trans}
+Suppose $T: \C \to \C$ is an $\R$-linear transformation such that it preserves angles. Then there is some $a \in \C$ such that $T(z) = az$ or $T(z) = a \ol{z}$. 
+\end{proposition}
+\begin{proof}
+Suppose $S$ is a homothetic linear transformation so that $S^{-1} T$ fixes $(1, 0)$. Since $S^{-1} T$ is also angle-preserving, we know that $(S^{-1} T)(0, 1) = (0, c)$ for some $c \neq 0$. Finally we know that $(S^{-1} T) (1, 1) = (1, c)$ since $S^{-1} T$ is linear. The fact that it is angle-preserving means that $c = \pm 1$. If $c = 1$ then $S^{-1} T = I$ so that $T(z) = S(z) = az$. If $c = -1$ then $(S^{-1} T)(z) = \ol{z}$ so that $T(z) = a \ol{z}$. 
+\end{proof}
+
+\subsection{Rational functions}
+Like in the real case, a rational function $R$ is a function of the form
+$$R(z) = \frac{P(z)}{Q(z)}$$
+where $P, Q$ are polynomials with no common factor. The zeroes of $R$ are simply the zeroes of $P$ while the zeroes of $Q$ are called the \textit{poles} of $R$. In other words, the poles of $R$ are points $z_0$ in the extended complex plane (therefore $z_0$ could be $\infty$) so that
+$$\lim_{z \to z_0} R(z) = \infty$$
+Equivalently, the poles are the points that are mapped to the north pole on the Riemann sphere which hopefully justifies the name. 
+
+We also want to consider the order of a zeroes and poles. The order of a zero is simply its multiplicity (as a root of the polynomial). The order of a pole of $R$ then is the order of the corresponding zero of the denominator. We see that the poles of $R'(z)$ are the same as the poles of $R$. This is easy to see using the quotient rule of derivative.
+$$ R'(z) = \frac{P'(z) Q(z) - P(z) Q'(z)}{Q(z)^2} $$
+One might wonder what happens to the order of poles upon differentiation. Suppose $Q(z) = (z - a)^k \tilde{Q}(z)$ where $z - a$ does not divide $\tilde{Q}(z)$. Then $Q'(z) = k (z - a)^{k - 1} \tilde{Q}(z) + (z - a)^k \tilde{Q}'(z)$. Then
+\begin{align*}
+    R'(z) &= \frac{P'(z)(z - a)^k \tilde{Q}(z) - P(z) \cdot (k (z - a)^{k - 1} \tilde{Q}(z) + (z - a)^k \tilde{Q}'(z))} {Q(z)^2}\\
+    &= \frac{(z - a)^{k - 1} \cdot ((z - a) P'(z)\tilde{Q}(z) - P(z) \cdot ( k\tilde{Q}(z) + (z - a)\tilde{Q}'(z)))}{(z - a)^{2k} \tilde{Q}(z)^2}\\
+    &= \frac{(z - a) P'(z)\tilde{Q}(z) - P(z) \cdot (k\tilde{Q}(z) + (z - a)\tilde{Q}'(z))}{(z - a)^{k + 1} \tilde{Q}(z)^2}
+\end{align*}
+Thus we see that the order of the pole $a$ was $k$ in $R$ and $k + 1$ in $R'$.
+
+At this point, one might wonder how we would find the order of a pole at $\infty$. In this case we will consider $R_1(z) = R(\frac{1}{z})$. Then $R$ has a pole at $\infty$ if and only if $R_1$ has a pole (the same one) at 0. So in particular the order of a pole of $R(z)$ at $\infty$ is the order of the pole of $R_1(z)$ at 0. We of course do the same thing if instead $\infty$ is a zero and we want to find its order.
+
+Suppose
+$$ R(z) = \frac{a_m z^m +\dots + a_0}{b_n z^n + \dots + b_0} $$
+with $a_m, b_n \neq 0$. Then
+$$ R_1(z) = R\left(\frac{1}{z}\right) = z^{n - m} \cdot \frac{a_0 z^m + a_1 z^{m - 1} + \dots + a_m}{b_0 z^n + b_1 z^{n - 1} +\dots + b_n} $$
+Therefore if $n > m$ then $R(z)$ has a 0 at $\infty$ of order $n - m$. $R$ also has $m$ finite zeroes, counted with multiplicity. Thus the total number of zeroes counted with multiplicity (including $\infty$) is $n$. If $n < m$, then $R(z)$ has a pole at $\infty$ of order $m - n$ and as before we can conclude that the total number of poles is $m$. Finally, if $n = m$ then $R(\infty) = \frac{a_n}{b_m}$ which we know is not 0. 
+
+The moral of the story is that the total number of zeroes/poles for a rational function is always $\max\{n, m\}$. We often call this number the order of the rational function. A consequence of this statement is that every equation $R(z) = a$ always has order $R$ solutions. 
+
+\subsubsection{Möbius Transformations}
+Consider rational functions of order 1. Such functions are of the form
+$$ S(z) = \frac{az + b}{cz + d}$$
+with $ad - bc \neq 0$ (if $ad = bc$ then $S$ simplifies to a constant function which would have order 0). Such maps are called fractional linear transformations or Möbius transformations. 
+
+We know that $S(z) = w$ has exactly 1 root for every $w \in \C$ implying that $S$ is invertible. In fact we can compute this directly to find that 
+$$ S^{-1}(z) = \frac{dz - b}{-cz + a}$$
+
+\subsubsection{Partial Fraction Decomposition}
+Partial fraction decomposition is a very useful tool since it allows us to turn a big product into a sum of simpler things. Essentially, partial decomposition allows us to `deal with' the distinct poles of the rational function one at a time.
+
+\begin{theorem}[Partial fraction decomposition]
+Given a rational function $R(z) = \frac{P(z)}{Q(z)}$ we can write it as
+$$R(z) = G(z) + \sum_{j = 1}^l G_j \left( \frac{1}{z - \beta_j} \right)$$
+where $G$ and $G_j$ are polynomials and $\beta_j$ are zeroes of $Q$.
+\end{theorem}
+\begin{proof}
+We have polynomials $P, Q$ and wish to simplify
+$$R(z) = \frac{P(z)}{Q(z)}$$
+First we perform polynomial long division until deg$(P) \leq$ deg$(Q)$. To be precise, we find polynomials $G, \widetilde{H}$ so that
+$$P(z) = G(z) Q(z) + \widetilde{H}(z)$$
+with $\text{deg}(\widetilde{H}) \leq \text{deg}(Q)$ and $G$ is a polynomial without constant term (since the degree of $\widetilde{H}$ and $Q$ are allowed to be the same, we can multiply the constant term in $G$ by $Q$ and absorb it into $\widetilde{H}$). We then have that
+$$R(z) = G(z) + H(z)$$
+where $H(z) := \frac{\widetilde{H}(z)}{Q(z)}$. Note that $H(z)$ is finite at $\infty$ (compare the degrees of $\widetilde{H}$ and $Q$). This means that the order of the pole of $R(z)$ at $\infty$ is simply the degree of $G$. Hence why we call $G$ the singular part of $R(z)$ at $\infty$. 
+
+Hence we've gotten some handle on the infinite poles of $R$. Now we would like to do something similar with the finite poles. Let $\beta_1, \dots, \beta_l$ be distinct finite poles of $R(z)$. Then $R \left(\beta_j + \frac{1}{\zeta} \right)$ is a rational function in $\zeta$ with a pole at $\infty$. Then by performing a change in coordinates we find that
+$$R \left(z \right) = G_j \left(\frac{1}{z - \beta_j} \right) + H_j\left(\frac{1}{z -\beta_j}\right)$$
+Recall that $G_j$ has no constant term at $H_j$ is finite at $\infty$.
+
+Now consider 
+$$R(z) - G(z) - \sum_{j = 1}^l G_j \left( \frac{1}{z - \beta_j} \right)$$
+This is a rational function and we would like to determine its order by finding the number of poles it has. 
+
+We see that this rational function can have poles at most at $\beta_1, \dots, \beta_l$ and $\infty$. For $z = \beta_j$ there are only two terms that can be infinity, namely $R(z)$ and $G_j(\frac{1}{z - \beta_j})$ but
+$$ R(z) -  G_j \left( \frac{1}{z - \beta_j} \right) = H_j \left(\frac{1}{z - \beta_j}\right)$$
+which we know is finite at $\beta_j$. A similar thing happens for $z = \infty$ by considering $R(z) - G(z)$. Thus we conclude that the above rational function has no poles and therefore must be of order 0 implying that it is a constant. By absorbing the constant into $G(z)$ we can write
+$$ R(z) = G(z) + \sum_{j = 1}^l G_j \left( \frac{1}{z - \beta_j} \right) $$
+\end{proof}
+\begin{remark}
+The case with real polynomials can be deduced from the above by observing that roots of real polynomials appear in complex conjugate pairs.
+\end{remark}
