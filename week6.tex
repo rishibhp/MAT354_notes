@@ -79,7 +79,7 @@ Let us define $R_i := R^{(1)}$ and $\gamma_i := \gamma^{(1)}$. From here we can 
 \begin{equation}\label{eq:cauchy-thm-ineq-1}
     \abs{\mu(R^{(k)}} = \abs{\int_{\gamma^{(k)}} f(z) dz} \geq  \frac{1}{4^k} \abs{ \int_\gamma f(z) dz } = \frac{1}{4^k} \abs{\mu(R)}
 \end{equation}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics{Images/cauchy_thm_division.png}
     \caption{Divide $R$ into a chain of rectangles}
@@ -122,14 +122,14 @@ Cauchy's Theorem remains true if $f(z)$ is continuous in $\Omega$ and holomorphi
     goes through an edge. 
 
     Let us consider the latter case first. In this case, we can take another rectangle whose edge is $\epsilon$ away from the original rectangle, as shown in \autoref{fig:cauchy-thm-gen}. 
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \centering
         \includegraphics{Images/cauchy_thm_gen.png}
         \caption{Rectangle with non-holomorphic edge}
         \label{fig:cauchy-thm-gen}
     \end{figure}
     We know the integral over the boundary of the smaller rectangle is 0 for every $\epsilon > 0$ and as we let $\epsilon \to 0$, the integral converges to the integral over the boundary of the desired rectangle which therefore must be 0. of the If we are instead in a situation like \autoref{fig:cauchy-thm-gen2}, then we can reduce it back to the prior case by integrating on the upper and lower halves separately and summing the values.
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \centering
         \includegraphics{Images/cauchy_thm_gen2.png}
         \caption{Rectangle intersecting non-holomorphic edge}
@@ -206,7 +206,7 @@ Suppose $\gamma_0, \gamma_1: [0, 1] \to \Omega$ be continuous curves with the sa
     \gamma(s, 1) &= \gamma_0(1) = \gamma_1(1)
 \end{align*}
 \end{definition}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=0.8]{Images/homotopy_example.png}
     \caption{Homotopic curves with fixed endpoints. Dotted lines indicates the homotopy between the two curves (see \href{https://www.desmos.com/calculator/jsdrzz6v0d}{desmos} for interactive version).}

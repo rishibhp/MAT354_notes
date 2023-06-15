@@ -44,7 +44,7 @@ $$\lim_{x \to \pm \infty} xR(x) = 0$$
 
 In order to evaluate this integral we will evaluate over a certain curve in the complex plane that includes a part of the real line. We will see that the portion of the curve that does not lie on the real axis contributes negligibly to the integral, especially when we consider larger and larger curves. Hence, the value of the integral over the entire curve is very well approximated by the value of the integral over the real line and in the limit the two are equal. On the other hand, the integral over the entire curve can be calculated easily by the Residue Theorem. Hence this gives us a fairly easy way to compute the integral of the rational function over the entire real line.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics{Images/real_line_contour.png}
     \caption{We integrate over a semicircle in the (closed) upper half-plane}
@@ -88,7 +88,7 @@ $$ \int_{-\infty}^{\infty} R(x) e^{ix} dx = 2\pi i \sum_{\Im(z) > 0} res(R(z) e^
 
 In fact, this equation holds even when $R$ only has a simple pole at $\infty$. This means that $\abs{zR(z)}$ is bounded as $z \to \infty$. In this case, it's not even immediate that the integral exists. In order to show that this integral exists and verify that it is given by the sum of residues as given above, we will integrate over the boundary of a rectangle whose vertices are $(r_1, 0), (r_1, s), (-r_2, s), (-r2, 0) $ where $r_1, r_2, s > 0$. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics{Images/rational_exp_contour.png}
     \caption{We integrate over the boundary of this rectangle}
@@ -141,7 +141,7 @@ Since this is real we can immediately conclude
 
 \subsection{Poles on the real axis}
 There are times when the rational function $R(x)$ has a pole on the real axis but $R(x) \sin x$ or $R(x) \cos(x)$ is still integrable over the real line. A primary example of this is $\frac{\sin x}{x}$. Note in this case our previous contour will not work since a pole lies on the curve itself. In order to avoid this, we go around 0 by including a small semicircle of radius $\delta$ on the contour.
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics{Images/real_pole_contour.png}
     \caption{We go around the pole at 0}
@@ -162,7 +162,7 @@ We see that $z^{-1} e^{iz}$ has no poles in the upper half-plane and only has a 
 Since $\sin x$ corresponds to the imaginary part, we get 
 $$ \int_{0}^{\infty} \frac{\sin x}{x} dx = \frac{1}{2} \cdot \pi  = \frac{\pi}{2} $$
 
-\subsection{Fractional powers of $x$}
+\subsection{Fractional exponents}
 So far we've been working with fairly well-behave functions but there are times when we wish to integrate functions like $\sqrt{x}$ which are perfectly well-defined on the real line (or the positive real line to be precise) but not so on the complex plane. The problem, of course, is the fact that this is a multivalued functions so we need to be quite careful with how do we things. In fact we will exploit the multivaluedness to find the answer in a rather clever way. 
 
 First we make things precise. Suppose we want to evaluate something of the form
@@ -172,7 +172,7 @@ for some $0 < \alpha < 1$ where $R(x)$ has no poles on $[0, \infty)$. First we c
 In order to evaluate this integral we first need to choose a branch of $x^\alpha$ which in turn requires us to choose a domain on which to specify the branch. We will choose our domain to be $\C \setminus [0, \infty)$ (it might seem odd that we have exclude exactly the region we want to integrate over, we will see that this is precisely what allows us to evaluate the integral). Choosing a branch of $x^\alpha$ is equivalent to choosing a branch of $\arg z$ on this domain; we choose $\arg z$ to lie in $(0, 2\pi)$. 
 Wit this set up, we can evaluate the given integral in the complex plane over the contour $\Gamma(\epsilon, r)$ as specified in \autoref{fig:keyhole_contour}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=1.1]{Images/keyhole_contour.png}
     \caption{Contour $\Gamma(\epsilon, r)$ for integrating fractional powers of $x$}
